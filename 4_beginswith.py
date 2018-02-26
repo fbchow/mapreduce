@@ -9,20 +9,20 @@ class MRWordBeginsWithFrequencyCount(MRJob):
 
 	def mapper(self, _, line):
 		line = line.split()
-		#my_list = [] 
+		my_list = [] 
 		for word in line:
 			beginning_of_word = word[0].lower()
-		#	my_list.append(beginning_of_word)	
+			my_list.append(beginning_of_word)	
 		#yield("beginning_chars", my_list)
-		yield("beginning char", beginning_of_word)  
+		yield(my_list, len(my_list))  
 
 	def reduce(self, key, values):
-		my_list = []
+		#my_list = []
 		
-		for p in values:
-			my_list.append(p)
-		count = collections.Counter(my_list)	
-		yield key, count 
+		#for p in values:
+		#	my_list.append(p)
+	#	count = collections.Counter(my_list)	
+		yield key, sum(count) 
 #		yield collections.Counter(values)
 
 if __name__ == '__main__':
